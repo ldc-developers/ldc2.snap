@@ -28,20 +28,39 @@ parts:
     source: git://github.com/ldc-developers/ldc.git
     source-tag: v1.1.0
     plugin: cmake
+    configflags:
+    - -DD_COMPILER=../../ldc-bootstrap/build/bin/ldmd2
     stage:
     - -etc/ldc2.conf
     build-packages:
     - build-essential
-    - ldc
     - llvm-dev
     - libconfig++-dev
     - libedit-dev
     - zlib1g-dev
     stage-packages:
     - libconfig9
-    - libphobos2-ldc68
+    after:
+    - ldc-bootstrap
   ldc-config:
     plugin: dump
     source: ldc-config
     organize:
       ldc2.conf: etc/ldc2.conf
+
+  ldc-bootstrap:
+    source: git://github.com/ldc-developers/ldc.git
+    source-tag: v0.17.2
+    plugin: cmake
+    stage:
+    - -*
+    prime:
+    - -*
+    build-packages:
+    - build-essential
+    - llvm-dev
+    - libconfig++-dev
+    - libedit-dev
+    - zlib1g-dev
+    stage-packages:
+    - libconfig9
