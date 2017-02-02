@@ -30,6 +30,7 @@ parts:
     plugin: cmake
     configflags:
     - -DD_COMPILER=../../ldc-bootstrap/build/bin/ldmd2
+    - -DCMAKE_BUILD_TYPE=Release
     stage:
     - -etc/ldc2.conf
     build-packages:
@@ -52,6 +53,8 @@ parts:
     source: git://github.com/ldc-developers/ldc.git
     source-tag: v0.17.3
     plugin: cmake
+    configflags:
+    - -DCMAKE_BUILD_TYPE=Release
     stage:
     - -*
     prime:
