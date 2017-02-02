@@ -50,7 +50,7 @@ parts:
 
   ldc-bootstrap:
     source: git://github.com/ldc-developers/ldc.git
-    source-tag: v0.17.2
+    source-tag: v0.17.3
     plugin: cmake
     stage:
     - -*
