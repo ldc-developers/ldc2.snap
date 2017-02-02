@@ -8,7 +8,7 @@ description: |
     of D2, and uses the LLVM Core libraries for code generation.
 
     This release of LDC uses the D2.071.2 frontend, runtime and
-    standard library.
+    standard library, and the LLVM 3.8 backend.
 
 confinement: classic
 grade: devel
@@ -34,7 +34,7 @@ parts:
     - -etc/ldc2.conf
     build-packages:
     - build-essential
-    - llvm-dev
+    - llvm-3.8-dev
     - libconfig++-dev
     - libedit-dev
     - zlib1g-dev
@@ -58,7 +58,7 @@ parts:
     - -*
     build-packages:
     - build-essential
-    - llvm-dev
+    - llvm-3.8-dev
     - libconfig++-dev
     - libedit-dev
     - zlib1g-dev
