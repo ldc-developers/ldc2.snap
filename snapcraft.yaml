@@ -7,9 +7,6 @@ description: |
     the official DMD compiler frontend to support the latest version
     of D2, and uses the LLVM Core libraries for code generation.
 
-    This release of LDC uses the D2.071.2 frontend, runtime and
-    standard library.
-
 confinement: classic
 grade: devel
 
