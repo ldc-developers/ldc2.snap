@@ -28,11 +28,11 @@ parts:
     configflags:
     - -DD_COMPILER=../../ldc-bootstrap/build/bin/ldmd2
     - -DCMAKE_BUILD_TYPE=Release
+    - -DLLVM_ROOT_DIR=../../llvm/install
     stage:
     - -etc/ldc2.conf
     build-packages:
     - build-essential
-    - llvm-dev
     - libconfig++-dev
     - libedit-dev
     - zlib1g-dev
@@ -40,6 +40,7 @@ parts:
     - libconfig9
     after:
     - ldc-bootstrap
+    - llvm
   ldc-config:
     plugin: dump
     source: ldc-config
@@ -52,15 +53,29 @@ parts:
     plugin: cmake
     configflags:
     - -DCMAKE_BUILD_TYPE=Release
+    - -DLLVM_ROOT_DIR=../../llvm/install
     stage:
     - -*
     prime:
     - -*
     build-packages:
     - build-essential
-    - llvm-dev
     - libconfig++-dev
     - libedit-dev
     - zlib1g-dev
     stage-packages:
     - libconfig9
+    after:
+    - llvm
+
+  llvm:
+    source: http://releases.llvm.org/3.9.1/llvm-3.9.1.src.tar.xz
+    plugin: cmake
+    configflags:
+    - -DCMAKE_BUILD_TYPE=Release
+    stage:
+    - -*
+    prime:
+    - -*
+    build-packages:
+    - build-essential
