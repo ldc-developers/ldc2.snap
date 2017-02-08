@@ -8,7 +8,7 @@ description: |
     of D2, and uses the LLVM Core libraries for code generation.
 
 confinement: classic
-grade: devel
+grade: stable
 
 apps:
   ldc2:
