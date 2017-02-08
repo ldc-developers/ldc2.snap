@@ -29,6 +29,7 @@ parts:
     - -DD_COMPILER=../../ldc-bootstrap/build/bin/ldmd2
     - -DCMAKE_BUILD_TYPE=Release
     - -DLLVM_ROOT_DIR=../../llvm/install
+    - -DLDC_INSTALL_LTOPLUGIN=ON
     stage:
     - -etc/ldc2.conf
     build-packages:
@@ -73,9 +74,11 @@ parts:
     plugin: cmake
     configflags:
     - -DCMAKE_BUILD_TYPE=Release
+    - -DLLVM_BINUTILS_INCDIR=/usr/include
     stage:
     - -*
     prime:
     - -*
     build-packages:
+    - binutils-dev
     - build-essential
