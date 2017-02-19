@@ -33,7 +33,7 @@ parts:
     stage:
     - -etc/ldc2.conf
     build-packages:
-    - build-essential
+    - gcc
     - libconfig++-dev
     - libedit-dev
     - zlib1g-dev
@@ -60,7 +60,7 @@ parts:
     prime:
     - -*
     build-packages:
-    - build-essential
+    - g++
     - libconfig++-dev
     - libedit-dev
     - zlib1g-dev
@@ -81,4 +81,4 @@ parts:
     - -*
     build-packages:
     - binutils-dev
-    - build-essential
+    - g++
