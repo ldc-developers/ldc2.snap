@@ -28,6 +28,7 @@ parts:
     configflags:
     - -DD_COMPILER=../../ldc-bootstrap/build/bin/ldmd2
     - -DCMAKE_BUILD_TYPE=Release
+    - -DCMAKE_C_FLAGS="-Wa,-mrelax-relocations=no"
     - -DLLVM_ROOT_DIR=../../llvm/install
     - -DLDC_INSTALL_LTOPLUGIN=ON
     stage:
