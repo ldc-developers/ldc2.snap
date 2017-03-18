@@ -24,6 +24,7 @@ parts:
   ldc:
     source: https://github.com/ldc-developers/ldc.git
     source-tag: v1.1.1
+    source-type: git
     plugin: cmake
     configflags:
     - -DD_COMPILER=../../ldc-bootstrap/build/bin/ldmd2
@@ -53,6 +54,7 @@ parts:
   ldc-bootstrap:
     source: https://github.com/ldc-developers/ldc.git
     source-tag: v0.17.3
+    source-type: git
     plugin: cmake
     configflags:
     - -DCMAKE_BUILD_TYPE=Release
