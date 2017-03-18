@@ -22,7 +22,7 @@ apps:
 
 parts:
   ldc:
-    source: git://github.com/ldc-developers/ldc.git
+    source: https://github.com/ldc-developers/ldc.git
     source-tag: v1.1.1
     plugin: cmake
     configflags:
@@ -51,7 +51,7 @@ parts:
       ldc2.conf: etc/ldc2.conf
 
   ldc-bootstrap:
-    source: git://github.com/ldc-developers/ldc.git
+    source: https://github.com/ldc-developers/ldc.git
     source-tag: v0.17.3
     plugin: cmake
     configflags:
