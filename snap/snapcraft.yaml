@@ -22,9 +22,7 @@ apps:
 
 parts:
   ldc:
-    source: https://github.com/ldc-developers/ldc.git
-    source-tag: v1.1.1
-    source-type: git
+    source: https://github.com/ldc-developers/ldc/releases/download/v1.1.1/ldc-1.1.1-src.tar.gz
     plugin: cmake
     configflags:
     - -DD_COMPILER=../../ldc-bootstrap/build/bin/ldmd2
@@ -52,9 +50,7 @@ parts:
       ldc2.conf: etc/ldc2.conf
 
   ldc-bootstrap:
-    source: https://github.com/ldc-developers/ldc.git
-    source-tag: v0.17.3
-    source-type: git
+    source: https://github.com/ldc-developers/ldc/releases/download/v0.17.3/ldc-0.17.3-src.tar.gz
     plugin: cmake
     configflags:
     - -DCMAKE_BUILD_TYPE=Release
