@@ -1,5 +1,5 @@
 name: ldc2
-version: 1.1.1
+version: 1.2.x
 summary: D compiler with LLVM backend
 description: |
     LDC is a portable compiler for the D programming Language, with
@@ -8,7 +8,7 @@ description: |
     of D2, and uses the LLVM Core libraries for code generation.
 
 confinement: classic
-grade: stable
+grade: devel
 
 apps:
   ldc2:
@@ -23,7 +23,7 @@ apps:
 parts:
   ldc:
     source: https://github.com/ldc-developers/ldc.git
-    source-tag: v1.1.1
+    source-branch: release-1.2.x
     source-type: git
     plugin: cmake
     configflags:
@@ -53,7 +53,7 @@ parts:
 
   ldc-bootstrap:
     source: https://github.com/ldc-developers/ldc.git
-    source-tag: v0.17.3
+    source-branch: ltsmaster
     source-type: git
     plugin: cmake
     configflags:
