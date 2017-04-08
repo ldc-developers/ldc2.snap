@@ -15,10 +15,13 @@ apps:
     command: bin/ldc2
   ldmd2:
     command: bin/ldmd2
+    aliases: [ldmd2]
   ldc-profdata:
     command: bin/ldc-profdata
+    aliases: [ldc-profdata]
   ldc-prune-cache:
     command: bin/ldc-prune-cache
+    aliases: [ldc-prune-cache]
 
 parts:
   ldc:
