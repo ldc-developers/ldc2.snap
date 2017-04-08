@@ -32,10 +32,12 @@ On Ubuntu 16.04 or higher with snapcraft installed
     cd ldc2.snap
     snapcraft
 
-Since ldc2 is packaged as a `classic` snap, the `snapcraft cleanbuild`
-command is not currently supported.  This is expected to be fixed with
-upcoming releases of `snapcraft`, so try it if you like, just don't be
-surprised if it fails with linker errors.
+To ensure a clean build, install LXD (`sudo apt install lxd`), configure
+its network settings, and then:
+
+    snapcraft cleanbuild
+
+to build the snap inside an LXD container.
 
 
 Installing
