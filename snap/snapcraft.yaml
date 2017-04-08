@@ -77,7 +77,7 @@ parts:
     - llvm
 
   llvm:
-    source: http://releases.llvm.org/3.9.1/llvm-3.9.1.src.tar.xz
+    source: http://releases.llvm.org/4.0.0/llvm-4.0.0.src.tar.xz
     plugin: cmake
     configflags:
     - -DCMAKE_BUILD_TYPE=Release
