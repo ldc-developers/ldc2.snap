@@ -35,11 +35,12 @@ parts:
     - -DCMAKE_C_FLAGS_RELEASE='-O3 -DNDEBUG -Wa,-mrelax-relocations=no'
     - -DLLVM_ROOT_DIR=../../llvm/install
     - -DLDC_INSTALL_LTOPLUGIN=ON
+    - -DMULTILIB=ON
     - -DCMAKE_VERBOSE_MAKEFILE=1
     stage:
     - -etc/ldc2.conf
     build-packages:
-    - gcc
+    - gcc-multilib
     - libedit-dev
     - zlib1g-dev
     after:
@@ -59,12 +60,13 @@ parts:
     configflags:
     - -DCMAKE_BUILD_TYPE=Release
     - -DLLVM_ROOT_DIR=../../llvm/install
+    - -DMULTILIB=ON
     stage:
     - -*
     prime:
     - -*
     build-packages:
-    - g++
+    - g++-multilib
     - libconfig++-dev
     - libedit-dev
     - zlib1g-dev
