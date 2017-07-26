@@ -74,8 +74,8 @@ parts:
     - llvm
 
   llvm:
-    source: http://releases.llvm.org/4.0.0/llvm-4.0.0.src.tar.xz
-    source-checksum: sha3_512/7df87508ab0cb089c299a72f52d8bf7380d1ef53e4a0fccb954def17bae4427d51b9ef8c167659b9b181ce97111829fb17bc56283e0241845ad69801f8a3f7ce
+    source: http://releases.llvm.org/4.0.1/llvm-4.0.1.src.tar.xz
+    source-checksum: sha3_512/5415363330e00d689ee64b95340210209becf9047b87dae4ce9b8926c7886db1ec1ef0455ff2d349df6668a32ed93f799aef2495a492e486334315c42bffee02
     plugin: cmake
     configflags:
     - -DCMAKE_BUILD_TYPE=Release
