@@ -36,7 +36,7 @@ parts:
     - -DLLVM_ROOT_DIR=../../llvm/install
     - -DLDC_INSTALL_LTOPLUGIN=ON
     - -DCMAKE_VERBOSE_MAKEFILE=1
-    install: ctest --verbose
+    install: ctest --output-on-failure --verbose -E "std\.net\.curl"
     stage:
     - -etc/ldc2.conf
     build-packages:
