@@ -77,8 +77,9 @@ parts:
     - llvm
 
   llvm:
-    source: http://releases.llvm.org/4.0.1/llvm-4.0.1.src.tar.xz
-    source-checksum: sha3_512/5415363330e00d689ee64b95340210209becf9047b87dae4ce9b8926c7886db1ec1ef0455ff2d349df6668a32ed93f799aef2495a492e486334315c42bffee02
+    source: https://github.com/ldc-developers/llvm.git
+    source-tag: ldc-v4.0.1
+    source-type: git
     plugin: cmake
     configflags:
     - -DCMAKE_BUILD_TYPE=Release
