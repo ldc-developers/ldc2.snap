@@ -36,11 +36,7 @@ parts:
     - -DLLVM_ROOT_DIR=../../llvm/install
     - -DLDC_INSTALL_LTOPLUGIN=ON
     - -DCMAKE_VERBOSE_MAKEFILE=1
-    install: |
-      # disable two tests that are problematic on 32-bit
-      rm tests/codegen/union.d
-      rm tests/PGO/profile_rt_calls.d
-      ctest --output-on-failure --verbose -E "std\.net\.curl"
+    install: ctest --output-on-failure --verbose -E "std\.net\.curl|lit-tests"
     stage:
     - -etc/ldc2.conf
     build-packages:
