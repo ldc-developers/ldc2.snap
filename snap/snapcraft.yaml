@@ -36,6 +36,7 @@ parts:
     - -DLLVM_ROOT_DIR=../../llvm/install
     - -DLDC_INSTALL_LTOPLUGIN=ON
     - -DCMAKE_VERBOSE_MAKEFILE=1
+    install: ctest --output-on-failure --verbose -E "std\.net\.curl|lit-tests"
     stage:
     - -etc/ldc2.conf
     build-packages:
@@ -46,6 +47,7 @@ parts:
     stage-packages:
     - libconfig9
     after:
+    - ctest-setup
     - ldc-bootstrap
     - llvm
   ldc-config:
@@ -91,3 +93,16 @@ parts:
     build-packages:
     - binutils-dev
     - g++
+
+  ctest-setup:
+    plugin: nil
+    stage:
+    - -*
+    prime:
+    - -*
+    build-packages:
+    - gdb
+    - python-pip
+    - python-setuptools
+    - unzip
+    prepare: pip install lit
