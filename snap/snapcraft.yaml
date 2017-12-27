@@ -58,7 +58,7 @@ parts:
 
   ldc-bootstrap:
     source: https://github.com/ldc-developers/ldc.git
-    source-tag: v0.17.4
+    source-tag: v0.17.5
     source-type: git
     plugin: cmake
     configflags:
