@@ -38,6 +38,7 @@ parts:
     - -DCMAKE_C_FLAGS_RELEASE='-O3 -DNDEBUG -Wa,-mrelax-relocations=no'
     - -DLLVM_ROOT_DIR=../../llvm/install
     - -DLDC_INSTALL_LTOPLUGIN=ON
+    - -DLDC_WITH_LLD=OFF
     - -DCMAKE_VERBOSE_MAKEFILE=1
     install: ctest --output-on-failure --verbose -E "std\.net\.curl|lit-tests"
     stage:
@@ -80,7 +81,7 @@ parts:
 
   llvm:
     source: https://github.com/ldc-developers/llvm.git
-    source-tag: ldc-v4.0.1
+    source-tag: ldc-v5.0.1
     source-type: git
     plugin: cmake
     configflags:
