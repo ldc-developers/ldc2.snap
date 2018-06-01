@@ -40,12 +40,14 @@ parts:
     - -DLLVM_ROOT_DIR=../../llvm/install
     - -DBUILD_LTO_LIBS=ON
     - -DLDC_INSTALL_LTOPLUGIN=ON
+    - -DMULTILIB=ON
     - -DCMAKE_VERBOSE_MAKEFILE=1
     install: ctest --output-on-failure --verbose -E "std\.net\.curl|std\.process|lit-tests"
     stage:
     - -etc/ldc2.conf
     build-packages:
-    - gcc
+    - gcc-multilib
+    - g++-multilib
     - libedit-dev
     - zlib1g-dev
     after:
@@ -66,6 +68,7 @@ parts:
     configflags:
     - -DCMAKE_BUILD_TYPE=Release
     - -DLLVM_ROOT_DIR=../../llvm/install
+    - -DMULTILIB=ON
     stage:
     - -*
     prime:
