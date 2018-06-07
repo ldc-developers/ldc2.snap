@@ -96,6 +96,7 @@ parts:
     configflags:
     - -DCMAKE_BUILD_TYPE=Release
     - -DLLVM_BINUTILS_INCDIR=/usr/include
+    - -DLLVM_TARGETS_TO_BUILD=X86\;AArch64\;ARM\;PowerPC\;NVPTX
     stage:
     - -*
     prime:
