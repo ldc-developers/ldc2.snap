@@ -68,7 +68,6 @@ parts:
     configflags:
     - -DCMAKE_BUILD_TYPE=Release
     - -DLLVM_ROOT_DIR=../../llvm/install
-    - -DMULTILIB=ON
     stage:
     - -*
     prime:
