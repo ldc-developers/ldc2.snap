@@ -32,23 +32,29 @@ parts:
     source-tag: v1.9.0
     source-type: git
     plugin: cmake
-    configflags:
-    - -DD_COMPILER=../../ldc-bootstrap/build/bin/ldmd2
-    - -DD_FLAGS='-w;-flto=thin'
-    - -DCMAKE_BUILD_TYPE=Release
-    - -DCMAKE_C_FLAGS_RELEASE='-O3 -DNDEBUG -Wa,-mrelax-relocations=no'
-    - -DLLVM_ROOT_DIR=../../llvm/install
-    - -DBUILD_LTO_LIBS=ON
-    - -DLDC_INSTALL_LTOPLUGIN=ON
-    - -DMULTILIB=ON
-    - -DCMAKE_VERBOSE_MAKEFILE=1
-    install: ctest --output-on-failure --verbose -E "std\.net\.curl|std\.process|lit-tests"
+    override-build: |
+      cmake ../src \
+        -DCMAKE_INSTALL_PREFIX= \
+        -DD_COMPILER=../../ldc-bootstrap/build/bin/ldmd2 \
+        -DD_FLAGS='-w;-flto=thin' \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_C_FLAGS_RELEASE='-O3 -DNDEBUG -Wa,-mrelax-relocations=no' \
+        -DLLVM_ROOT_DIR=../../llvm/install \
+        -DBUILD_LTO_LIBS=ON \
+        -DLDC_INSTALL_LTOPLUGIN=ON \
+        -DMULTILIB=ON \
+        -DCMAKE_VERBOSE_MAKEFILE=1 \
+        -GNinja
+      ninja -v
+      DESTDIR=../install ninja -v install
+      ctest --output-on-failure --verbose -E "std\.net\.curl|std\.process|lit-tests"
     stage:
     - -etc/ldc2.conf
     build-packages:
     - gcc-multilib
     - g++-multilib
     - libedit-dev
+    - ninja-build
     - zlib1g-dev
     after:
     - ctest-setup
