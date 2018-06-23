@@ -117,4 +117,4 @@ parts:
     - python-pip
     - python-setuptools
     - unzip
-    prepare: pip install lit
+    override-build: pip install lit
