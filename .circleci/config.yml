@@ -1,0 +1,28 @@
+defaults: &defaults
+  working_directory: &workdir ~/workspace
+  docker:
+    - image: snapcore/snapcraft:stable
+
+version: 2
+jobs:
+  build:
+    <<: *defaults
+    steps:
+    - checkout
+
+    - run:
+        name: Update index
+        command: apt update
+
+    - run:
+        name: Build snap
+        command: snapcraft
+
+    - persist_to_workspace:
+      root: *workdir
+
+workflows:
+  version: 2
+  commit:
+    jobs:
+    - build
