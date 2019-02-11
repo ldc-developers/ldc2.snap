@@ -65,7 +65,7 @@ parts:
 
   ldc-bootstrap:
     source: https://github.com/ldc-developers/ldc.git
-    source-tag: v0.17.5
+    source-tag: v0.17.6
     source-type: git
     plugin: cmake
     configflags:
@@ -87,11 +87,12 @@ parts:
 
   llvm:
     source: https://github.com/ldc-developers/llvm.git
-    source-tag: ldc-v5.0.1
+    source-tag: ldc-v6.0.1-3
     source-type: git
     plugin: cmake
     configflags:
     - -DCMAKE_BUILD_TYPE=Release
+    - -DCOMPILER_RT_INCLUDE_TESTS=OFF
     - -DLLVM_BINUTILS_INCDIR=/usr/include
     - -DLLVM_TARGETS_TO_BUILD=X86\;AArch64\;ARM\;PowerPC\;NVPTX
     stage:
