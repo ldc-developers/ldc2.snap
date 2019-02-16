@@ -44,7 +44,12 @@ parts:
         -GNinja
       ninja -v
       DESTDIR=../install ninja -v install
-      ctest --output-on-failure --verbose -E "std\.net\.curl|std\.process|lit-tests"
+      if [ -z "${SKIP_LDC_COMPILER_TESTS}" ]; then
+        echo "Skipping LDC compiler tests"
+      else
+        echo "Running LDC compiler tests"
+        ctest --output-on-failure --verbose -E "std\.net\.curl|std\.process|lit-tests"
+      fi
     stage:
     - -etc/ldc2.conf
     build-packages:
