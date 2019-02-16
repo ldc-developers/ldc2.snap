@@ -42,13 +42,13 @@ parts:
         -DMULTILIB=ON \
         -DCMAKE_VERBOSE_MAKEFILE=1 \
         -GNinja
-      ninja -v
+      ninja -v -j "${LDC_COMPILER_BUILD_CPUS:=$(nproc)}"
       DESTDIR=../install ninja -v install
       if [ -z "${SKIP_LDC_COMPILER_TESTS}" ]; then
         echo "Skipping LDC compiler tests"
       else
         echo "Running LDC compiler tests"
-        ctest --output-on-failure --verbose -E "std\.net\.curl|std\.process|lit-tests"
+        ctest -j "${LDC_COMPILER_BUILD_CPUS}" --output-on-failure --verbose -E "std\.net\.curl|std\.process|lit-tests"
       fi
     stage:
     - -etc/ldc2.conf

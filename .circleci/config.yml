@@ -16,7 +16,7 @@ jobs:
 
     - run:
         name: Check snapcraft version
-        command: snapcraft --version && /snap/bin/snapcraft --version && snap info snapcraft
+        command: snapcraft --version && /snap/bin/snapcraft --version && nproc
 
     - run:
         name: Build LLVM
@@ -31,6 +31,7 @@ jobs:
         command: snapcraft --no-parallel-builds
         environment: # compiler tests take too long for CircleCI's timeout
           SKIP_LDC_COMPILER_TESTS: 1
+          LDC_COMPILER_BUILD_CPUS: 1
 
     - persist_to_workspace:
         root: *workdir
