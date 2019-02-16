@@ -16,7 +16,7 @@ jobs:
 
     - run:
         name: Check snapcraft version
-        command: snapcraft --version && /snap/bin/snapcraft --version
+        command: snapcraft --version && /snap/bin/snapcraft --version && snap info snapcraft
 
     - run:
         name: Build LLVM
