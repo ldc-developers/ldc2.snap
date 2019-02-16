@@ -1,4 +1,5 @@
 defaults: &defaults
+  parallelism: 1
   working_directory: &workdir ~/workspace
   docker:
     - image: snapcore/snapcraft:stable
@@ -15,8 +16,16 @@ jobs:
         command: apt update
 
     - run:
-        name: Build snap
-        command: snapcraft --no-parallel-builds
+        name: Build LLVM
+        command: snapcraft build llvm
+
+    - run:
+        name: Build bootstrap LDC
+        command: snapcraft build ldc-bootstrap
+
+    - run:
+        name: Build LDC snap package
+        command: snapcraft
         environment: # compiler tests take too long for CircleCI's timeout
           SKIP_LDC_COMPILER_TESTS: 1
 
