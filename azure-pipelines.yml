@@ -1,0 +1,17 @@
+pr:
+- 1.*
+
+jobs:
+- job: ldc2_snap
+  timeoutInMinutes: 0
+  pool:
+    vmImage: ubuntu-16.04
+  steps:
+  - script: |
+      set -x
+      snap version
+      lxd --version
+      sudo snap install --classic --stable snapcraft
+      /snap/bin/snapcraft --version
+      /snap/bin/snapcraft
+    displayName: Build ldc2 snap package
