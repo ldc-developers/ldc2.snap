@@ -13,6 +13,7 @@ grade: stable
 apps:
   ldc2:
     command: bin/ldc2
+    completer: etc/bash_completion.d/ldc2
   ldmd2:
     command: bin/ldmd2
   ldc-build-runtime:
