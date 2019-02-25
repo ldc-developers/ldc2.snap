@@ -95,7 +95,8 @@ parts:
     - -DCMAKE_BUILD_TYPE=Release
     - -DCOMPILER_RT_INCLUDE_TESTS=OFF
     - -DLLVM_BINUTILS_INCDIR=/usr/include
-    - -DLLVM_TARGETS_TO_BUILD=X86\;AArch64\;ARM\;PowerPC\;NVPTX
+    - -DLLVM_TARGETS_TO_BUILD=AArch64;ARM;Mips;MSP430;NVPTX;PowerPC;X86
+    - -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD=RISCV;WebAssembly
     stage:
     - -*
     prime:
