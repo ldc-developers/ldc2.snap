@@ -11,6 +11,7 @@ jobs:
       set -x
       snap version
       lxd --version
+      sudo apt-get update
       sudo snap install --classic --stable snapcraft
       /snap/bin/snapcraft --version
       /snap/bin/snapcraft
