@@ -64,6 +64,12 @@ parts:
     organize:
       ldc2.conf: etc/ldc2.conf
 
+  ldc-license:
+    plugin: dump
+    source: doc
+    organize:
+      LICENSE: doc/LICENSE
+
   ldc-bootstrap:
     source: https://github.com/ldc-developers/ldc.git
     source-tag: v0.17.6
