@@ -29,6 +29,9 @@ Libraries (lib/ and include/d/ in the snap package):
  - The libphobos library statically links in zlib, which is distributed under
    the terms of the zlib license.
 
+ - The ldc-jit-rt library is distributed under the terms of the
+   Boost Software license (but additionally makes use of LLVM code).
+
  - The profile-rt runtime library (runtime/profile-rt) is a copy of LLVM's
    compiler-rt/profile library with a small D source addition. It is dual
    licensed under the University of Illinois Open Source License and under the
