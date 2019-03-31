@@ -1,5 +1,5 @@
 name: ldc2
-version: 1.11.0
+version: 1.12.0
 summary: D compiler with LLVM backend
 description: |
     LDC is a portable compiler for the D programming Language, with
@@ -26,14 +26,13 @@ apps:
 parts:
   ldc:
     source: https://github.com/ldc-developers/ldc.git
-    source-tag: &ldc-version v1.11.0
+    source-tag: &ldc-version v1.12.0
     source-type: git
     plugin: cmake
     override-build: |
       cmake ../src \
         -DCMAKE_INSTALL_PREFIX= \
         -DD_COMPILER=../../ldc-bootstrap/build/bin/ldmd2 \
-        -DD_FLAGS='-w;-flto=thin' \
         -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_C_FLAGS_RELEASE='-O3 -DNDEBUG -Wa,-mrelax-relocations=no' \
         -DLIB_SUFFIX="$(getconf LONG_BIT)" \
@@ -90,16 +89,17 @@ parts:
     - -*
     build-packages:
     - g++
-    - ldc
     - libedit-dev
     - ninja-build
     - zlib1g-dev
+    build-snaps:
+    - ldc2/1.11/stable
     after:
     - llvm
 
   llvm:
     source: https://github.com/ldc-developers/llvm.git
-    source-tag: ldc-v6.0.1-3
+    source-tag: ldc-v7.0.1
     source-type: git
     plugin: cmake
     configflags:
