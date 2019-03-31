@@ -13,6 +13,7 @@ jobs:
       lxd --version
       sudo apt-get update
       sudo snap install --classic --candidate snapcraft
-      /snap/bin/snapcraft --version
-      /snap/bin/snapcraft
+      export PATH="${PATH}:/snap/bin"
+      snapcraft --version
+      snapcraft
     displayName: Build ldc2 snap package
