@@ -32,7 +32,7 @@ parts:
     override-build: |
       cmake ../src \
         -DCMAKE_INSTALL_PREFIX= \
-        -DD_COMPILER=../../ldc-bootstrap/build/bin/ldmd2 \
+        -DD_COMPILER=ldmd2 \
         -DD_FLAGS='-w;-flto=thin' \
         -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_C_FLAGS_RELEASE='-O3 -DNDEBUG -Wa,-mrelax-relocations=no' \
@@ -54,9 +54,10 @@ parts:
     - libedit-dev
     - ninja-build
     - zlib1g-dev
+    build-snaps:
+    - ldc2/1.10/stable
     after:
     - ctest-setup
-    - ldc-bootstrap
     - llvm
   ldc-config:
     plugin: dump
@@ -69,28 +70,6 @@ parts:
     source: doc
     organize:
       LICENSE: doc/LICENSE
-
-  ldc-bootstrap:
-    source: https://github.com/ldc-developers/ldc.git
-    source-tag: v0.17.6
-    source-type: git
-    plugin: cmake
-    configflags:
-    - -DCMAKE_BUILD_TYPE=Release
-    - -DLLVM_ROOT_DIR=../../llvm/install
-    stage:
-    - -*
-    prime:
-    - -*
-    build-packages:
-    - g++
-    - libconfig++-dev
-    - libedit-dev
-    - zlib1g-dev
-    stage-packages:
-    - libconfig9
-    after:
-    - llvm
 
   llvm:
     source: https://github.com/ldc-developers/llvm.git
