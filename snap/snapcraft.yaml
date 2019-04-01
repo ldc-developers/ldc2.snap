@@ -26,7 +26,7 @@ apps:
 parts:
   ldc:
     source: https://github.com/ldc-developers/ldc.git
-    source-tag: v1.11.0
+    source-tag: &ldc-version v1.11.0
     source-type: git
     plugin: cmake
     override-build: |
@@ -72,23 +72,28 @@ parts:
 
   ldc-bootstrap:
     source: https://github.com/ldc-developers/ldc.git
-    source-tag: v0.17.6
+    source-tag: *ldc-version
     source-type: git
     plugin: cmake
-    configflags:
-    - -DCMAKE_BUILD_TYPE=Release
-    - -DLLVM_ROOT_DIR=../../llvm/install
+    override-build: |
+      cmake ../src \
+        -DBUILD_SHARED_LIBS=OFF \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DD_COMPILER=ldmd2 \
+        -DLLVM_ROOT_DIR=../../llvm/install \
+        -GNinja
+      ninja
+      DESTDIR=../install ninja install
     stage:
     - -*
     prime:
     - -*
     build-packages:
     - g++
-    - libconfig++-dev
+    - ldc
     - libedit-dev
+    - ninja-build
     - zlib1g-dev
-    stage-packages:
-    - libconfig9
     after:
     - llvm
 
