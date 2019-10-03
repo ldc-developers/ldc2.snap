@@ -98,7 +98,7 @@ parts:
 
   llvm:
     source: https://github.com/ldc-developers/llvm.git
-    source-tag: ldc-v8.0.0
+    source-tag: ldc-v8.0.1
     source-type: git
     plugin: cmake
     configflags:
