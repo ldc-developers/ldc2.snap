@@ -97,19 +97,27 @@ parts:
     - llvm
 
   llvm:
-    source: https://github.com/ldc-developers/llvm.git
-    source-tag: ldc-v9.0.0
+    source: https://github.com/ldc-developers/llvm-project.git
+    source-tag: ldc-v9.0.1
     source-type: git
     plugin: cmake
-    configflags:
-    - -DCMAKE_BUILD_TYPE=Release
-    - -DCOMPILER_RT_INCLUDE_TESTS=OFF
-    - -DLLVM_BINUTILS_INCDIR=/usr/include
-    - -DLLVM_TARGETS_TO_BUILD=AArch64;ARM;Mips;MSP430;NVPTX;PowerPC;X86
-    - -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD=RISCV;WebAssembly
-    - -DLLVM_ENABLE_TERMINFO=OFF
-    - -DLLVM_ENABLE_LIBEDIT=OFF
-    - -DLLVM_INCLUDE_TESTS=OFF
+    override-build: |
+      cmake ../src/llvm \
+        -DCMAKE_INSTALL_PREFIX= \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_CXX_FLAGS=-static-libstdc++ \
+        -DCOMPILER_RT_INCLUDE_TESTS=OFF \
+        -DCOMPILER_RT_USE_LIBCXX=OFF \
+        -DLLVM_BINUTILS_INCDIR=/usr/include \
+        -DLLVM_TARGETS_TO_BUILD='AArch64;ARM;Mips;MSP430;NVPTX;PowerPC;RISCV;WebAssembly;X86' \
+        -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD='AVR' \
+        -DLLVM_ENABLE_PROJECTS='compiler-rt;lld' \
+        -DLLVM_ENABLE_TERMINFO=OFF \
+        -DLLVM_ENABLE_LIBEDIT=OFF \
+        -DLLVM_INCLUDE_TESTS=OFF \
+        -GNinja
+      ninja
+      DESTDIR=../install ninja install
     stage:
     - -*
     prime:
@@ -117,6 +125,7 @@ parts:
     build-packages:
     - binutils-dev
     - g++
+    - ninja-build
 
   ctest-setup:
     plugin: nil
