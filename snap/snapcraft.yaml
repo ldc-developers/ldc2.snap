@@ -45,6 +45,9 @@ parts:
         -GNinja
       ninja -v
       DESTDIR=../install ninja -v install
+      # Work around horrible DMD testsuite bug
+      sed -i 's/    2019/    __YEAR__/g' \
+          ../src/tests/d2/dmd-testsuite/compilable/extra-files/ddocYear.html
       ctest --output-on-failure --verbose -E "std\.net\.curl|std\.process|lit-tests"
     stage:
     - -etc/ldc2.conf
