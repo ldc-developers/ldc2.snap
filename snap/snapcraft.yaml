@@ -28,6 +28,7 @@ parts:
     source: https://github.com/ldc-developers/ldc.git
     source-tag: &ldc-version v1.18.0
     source-type: git
+    source-depth: 1
     plugin: cmake
     override-build: |
       cmake ../src \
@@ -73,6 +74,7 @@ parts:
     source: https://github.com/ldc-developers/ldc.git
     source-tag: *ldc-version
     source-type: git
+    source-depth: 1
     plugin: cmake
     override-build: |
       cmake ../src \
@@ -100,6 +102,7 @@ parts:
     source: https://github.com/ldc-developers/llvm-project.git
     source-tag: ldc-v9.0.1
     source-type: git
+    source-depth: 1
     plugin: cmake
     override-build: |
       cmake ../src/llvm \
