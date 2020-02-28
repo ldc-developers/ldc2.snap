@@ -52,7 +52,6 @@ parts:
     build-packages:
     - gcc-multilib
     - g++-multilib
-    - libedit-dev
     - ninja-build
     - zlib1g-dev
     after:
@@ -87,7 +86,6 @@ parts:
     build-packages:
     - g++
     - libconfig++-dev
-    - libedit-dev
     - zlib1g-dev
     stage-packages:
     - libconfig9
