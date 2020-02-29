@@ -111,6 +111,8 @@ parts:
         -DCMAKE_INSTALL_PREFIX= \
         -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_CXX_FLAGS=-static-libstdc++ \
+        -DCOMPILER_RT_BAREMETAL_BUILD=ON \
+        -DCOMPILER_RT_BUILD_BUILTINS=ON \
         -DCOMPILER_RT_INCLUDE_TESTS=OFF \
         -DCOMPILER_RT_USE_LIBCXX=OFF \
         -DLLVM_BINUTILS_INCDIR=/usr/include \
