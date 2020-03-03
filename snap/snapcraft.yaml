@@ -58,8 +58,10 @@ parts:
     - g++-multilib
     - ninja-build
     - zlib1g-dev
+    # needed only for ctest
+    - gdb
+    - unzip
     after:
-    - ctest-setup
     - ldc-bootstrap
     - llvm
   ldc-config:
@@ -131,13 +133,3 @@ parts:
     - binutils-dev
     - g++
     - ninja-build
-
-  ctest-setup:
-    plugin: nil
-    stage:
-    - -*
-    prime:
-    - -*
-    build-packages:
-    - gdb
-    - unzip
