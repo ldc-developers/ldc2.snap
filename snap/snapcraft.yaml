@@ -91,6 +91,7 @@ parts:
         -DD_COMPILER=ldmd2 \
         -DBUILD_LTO_LIBS=ON \
         -DLDC_INSTALL_LTOPLUGIN=ON \
+        -DLDC_INSTALL_LLVM_RUNTIME_LIBS=ON \
         -DLLVM_ROOT_DIR=../../llvm/install \
         -GNinja
       ninja
