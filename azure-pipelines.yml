@@ -16,5 +16,5 @@ jobs:
       export PATH="${PATH}:/snap/bin"
       sudo chown root:root /
       snapcraft --version
-      snapcraft --destructive-mode
+      snapcraft --destructive-mode --enable-experimental-package-repositories
     displayName: Build ldc2 snap package

@@ -25,8 +25,19 @@ apps:
   ldc-prune-cache:
     command: bin/ldc-prune-cache
 
+package-repositories:
+- type: apt
+  deb-types: [deb]
+  url: http://apt.llvm.org/$SNAPCRAFT_APT_RELEASE
+  suites: [llvm-toolchain-$SNAPCRAFT_APT_RELEASE-9]
+  components: [main]
+  key-id: 6084F3CF814B57C1CF12EFD515CF4D18AF4F7421
+
 parts:
   ldc:
+    build-environment:
+    - CC: &c-compiler clang-9
+    - CXX: &cxx-compiler clang++-9
     source: https://github.com/ldc-developers/ldc.git
     source-tag: &ldc-version v1.19.0
     source-type: git
@@ -50,10 +61,11 @@ parts:
       # Work around horrible DMD testsuite bug
       sed -i 's/    2019/    __YEAR__/g' \
           ../src/tests/d2/dmd-testsuite/compilable/extra-files/ddocYear.html
-      ctest --output-on-failure --verbose -E "std\.net\.curl|std\.process|lit-tests"
+      CC=gcc CXX=g++ ctest --output-on-failure --verbose -E "std\.net\.curl|std\.process|lit-tests"
     stage:
     - -etc/ldc2.conf
     build-packages:
+    - *c-compiler
     - gcc-multilib
     - g++-multilib
     - ninja-build
@@ -77,6 +89,9 @@ parts:
       LICENSE: doc/LICENSE
 
   ldc-bootstrap:
+    build-environment:
+    - CC: *c-compiler
+    - CXX: *cxx-compiler
     source: https://github.com/ldc-developers/ldc.git
     source-tag: *ldc-version
     source-type: git
@@ -95,6 +110,7 @@ parts:
     prime:
     - -*
     build-packages:
+    - *c-compiler
     - g++
     - ninja-build
     - zlib1g-dev
@@ -104,6 +120,9 @@ parts:
     - llvm
 
   llvm:
+    build-environment:
+    - CC: *c-compiler
+    - CXX: *cxx-compiler
     source: https://github.com/ldc-developers/llvm-project.git
     source-tag: ldc-v9.0.1
     source-type: git
@@ -112,7 +131,6 @@ parts:
       cmake ../src/llvm \
         -DCMAKE_INSTALL_PREFIX= \
         -DCMAKE_BUILD_TYPE=Release \
-        -DCMAKE_CXX_FLAGS=-static-libstdc++ \
         -DCOMPILER_RT_INCLUDE_TESTS=OFF \
         -DCOMPILER_RT_USE_LIBCXX=OFF \
         -DLLVM_BINUTILS_INCDIR=/usr/include \
@@ -131,5 +149,6 @@ parts:
     - -*
     build-packages:
     - binutils-dev
+    - *c-compiler
     - g++
     - ninja-build
