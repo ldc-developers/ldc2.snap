@@ -27,109 +27,18 @@ apps:
 
 parts:
   ldc:
-    source: https://github.com/ldc-developers/ldc.git
-    source-tag: &ldc-version v1.19.0
-    source-type: git
-    plugin: cmake
-    override-build: |
-      cmake ../src \
-        -DCMAKE_INSTALL_PREFIX= \
-        -DD_COMPILER=../../ldc-bootstrap/build/bin/ldmd2 \
-        -DCMAKE_BUILD_TYPE=Release \
-        -DCMAKE_C_FLAGS_RELEASE='-O3 -DNDEBUG -Wa,-mrelax-relocations=no' \
-        -DLIB_SUFFIX="$(getconf LONG_BIT)" \
-        -DLLVM_ROOT_DIR=../../llvm/install \
-        -DBUILD_LTO_LIBS=ON \
-        -DLDC_INSTALL_LTOPLUGIN=ON \
-        -DLDC_INSTALL_LLVM_RUNTIME_LIBS=ON \
-        -DMULTILIB=ON \
-        -DCMAKE_VERBOSE_MAKEFILE=1 \
-        -GNinja
-      ninja -v
-      DESTDIR=../install ninja -v install
-      # Work around horrible DMD testsuite bug
-      sed -i 's/    2019/    __YEAR__/g' \
-          ../src/tests/d2/dmd-testsuite/compilable/extra-files/ddocYear.html
-      ctest --output-on-failure --verbose -E "std\.net\.curl|std\.process|lit-tests"
-    stage:
-    - -etc/ldc2.conf
-    build-packages:
-    - gcc-multilib
-    - g++-multilib
-    - ninja-build
-    - zlib1g-dev
-    # needed only for ctest
-    - gdb
-    - unzip
-    after:
-    - ldc-bootstrap
-    - llvm
-  ldc-config:
+    source:
+    - on amd64: https://github.com/ldc-developers/ldc/releases/download/v$SNAPCRAFT_PROJECT_VERSION/ldc2-$SNAPCRAFT_PROJECT_VERSION-linux-x86_64.tar.xz
+    - on arm64: https://github.com/ldc-developers/ldc/releases/download/v$SNAPCRAFT_PROJECT_VERSION/ldc2-$SNAPCRAFT_PROJECT_VERSION-linux-aarch64.tar.xz
     plugin: dump
-    source: ldc-config
-    organize:
-      ldc2.conf: etc/ldc2.conf
-
-  ldc-license:
-    plugin: dump
-    source: doc
     organize:
       LICENSE: doc/LICENSE
-
-  ldc-bootstrap:
-    source: https://github.com/ldc-developers/ldc.git
-    source-tag: *ldc-version
-    source-type: git
-    plugin: cmake
-    override-build: |
-      cmake ../src \
-        -DBUILD_SHARED_LIBS=OFF \
-        -DCMAKE_BUILD_TYPE=Release \
-        -DD_COMPILER=ldmd2 \
-        -DLLVM_ROOT_DIR=../../llvm/install \
-        -GNinja
-      ninja
-      DESTDIR=../install ninja install
     stage:
-    - -*
-    prime:
-    - -*
-    build-packages:
-    - g++
-    - ninja-build
-    - zlib1g-dev
-    build-snaps:
-    - ldc2/1.11/stable
-    after:
-    - llvm
-
-  llvm:
-    source: https://github.com/ldc-developers/llvm-project.git
-    source-tag: ldc-v9.0.1
-    source-type: git
-    plugin: cmake
-    override-build: |
-      cmake ../src/llvm \
-        -DCMAKE_INSTALL_PREFIX= \
-        -DCMAKE_BUILD_TYPE=Release \
-        -DCMAKE_CXX_FLAGS=-static-libstdc++ \
-        -DCOMPILER_RT_INCLUDE_TESTS=OFF \
-        -DCOMPILER_RT_USE_LIBCXX=OFF \
-        -DLLVM_BINUTILS_INCDIR=/usr/include \
-        -DLLVM_TARGETS_TO_BUILD='AArch64;ARM;Mips;MSP430;NVPTX;PowerPC;RISCV;WebAssembly;X86' \
-        -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD='AVR' \
-        -DLLVM_ENABLE_PROJECTS='compiler-rt;lld' \
-        -DLLVM_ENABLE_TERMINFO=OFF \
-        -DLLVM_ENABLE_LIBEDIT=OFF \
-        -DLLVM_INCLUDE_TESTS=OFF \
-        -GNinja
-      ninja
-      DESTDIR=../install ninja install
-    stage:
-    - -*
-    prime:
-    - -*
-    build-packages:
-    - binutils-dev
-    - g++
-    - ninja-build
+    - -bin/ddemangle
+    - -bin/dub
+    - -bin/dustmite
+    - -bin/rdmd
+    - -README
+    stage-packages:
+    - libicu55
+    - libxml2
