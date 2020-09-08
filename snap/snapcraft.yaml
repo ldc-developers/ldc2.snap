@@ -1,5 +1,5 @@
 name: ldc2
-version: 1.21.0
+version: 1.22.0
 summary: D compiler with LLVM backend
 description: |
     LDC is a portable compiler for the D programming Language, with
