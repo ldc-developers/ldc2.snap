@@ -31,6 +31,7 @@ parts:
     - on amd64: https://github.com/ldc-developers/ldc/releases/download/v$SNAPCRAFT_PROJECT_VERSION/ldc2-$SNAPCRAFT_PROJECT_VERSION-linux-x86_64.tar.xz
     - on arm64: https://github.com/ldc-developers/ldc/releases/download/v$SNAPCRAFT_PROJECT_VERSION/ldc2-$SNAPCRAFT_PROJECT_VERSION-linux-aarch64.tar.xz
     plugin: dump
+    build-attributes: [no-patchelf]
     organize:
       LICENSE: doc/LICENSE
     stage:
